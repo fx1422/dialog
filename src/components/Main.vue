@@ -2,9 +2,7 @@
   <div class="main">
    <div class="tab">
      <ul>
-       <li @click="addClassRed" @click="currentView = 'home'" >Home</li>
-       <li @click="currentView = 'new'">New</li>
-       <li @click="currentView = 'focus'">Focus</li>
+       <li v-for="(tab,index) in tabList"  @click="currentView = tab,addClassRed(index)" :class="{active:index==num}" >{{tab}}</li>
      </ul>
    </div>
     <div>
@@ -23,18 +21,22 @@
       return {
         message: 'this is Main',
         currentView:'home',
-        active:true
+        active:true,
+        tabList:['Home','New','Focus'],
+        num:0
       }
     },
     methods:{
-      addClassRed () {
-        this.show= !this.show
+      addClassRed (index) {
+        this.num=index
+        console.log(index)
+        console.log(this.num)
       }
     },
     components: {
-      home: page1,
-      new: page2,
-      focus: page3
+      Home: page1,
+      New: page2,
+      Focus: page3
     }
   }
 </script>
